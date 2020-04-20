@@ -1,0 +1,2 @@
+/usr/bin/ar qc librnnLib.a  CMakeFiles/rnnLib.dir/celt_lpc.c.o CMakeFiles/rnnLib.dir/denoise.c.o CMakeFiles/rnnLib.dir/denoise16.c.o CMakeFiles/rnnLib.dir/kiss_fft.c.o CMakeFiles/rnnLib.dir/pitch.c.o CMakeFiles/rnnLib.dir/rnn.c.o CMakeFiles/rnnLib.dir/rnn_data.c.o
+/usr/bin/ranlib librnnLib.a

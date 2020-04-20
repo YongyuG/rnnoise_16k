@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.12)
+project(rnn_gao_new C)
+set(rnn_gao_v2 main.c)
+set(CMAKE_C_STANDARD 11)
+include_directories(include)
+#AUX_SOURCE_DIRECTORY(. DIR_SRCS)
+ADD_SUBDIRECTORY(src)
+
+add_executable(rnn_gao_new main.c)
+target_link_libraries(rnn_gao_new rnnLib -lm)

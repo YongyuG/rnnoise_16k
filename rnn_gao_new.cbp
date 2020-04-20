@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="rnn_gao_new"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\src\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/yongyug/CLionProjects/rnn_gao_new"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/yongyug/CLionProjects/rnn_gao_new"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/yongyug/CLionProjects/rnn_gao_new"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rnn_gao_new">
+				<Option output="/home/yongyug/CLionProjects/rnn_gao_new/rnn_gao_new" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/yongyug/CLionProjects/rnn_gao_new"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/yongyug/CLionProjects/rnn_gao_new/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 rnn_gao_new"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rnn_gao_new/fast">
+				<Option output="/home/yongyug/CLionProjects/rnn_gao_new/rnn_gao_new" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/yongyug/CLionProjects/rnn_gao_new"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/yongyug/CLionProjects/rnn_gao_new/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 rnn_gao_new/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rnnLib">
+				<Option output="/home/yongyug/CLionProjects/rnn_gao_new/src/librnnLib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/yongyug/CLionProjects/rnn_gao_new/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/yongyug/CLionProjects/rnn_gao_new/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/src/Makefile&quot;  VERBOSE=1 rnnLib"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rnnLib/fast">
+				<Option output="/home/yongyug/CLionProjects/rnn_gao_new/src/librnnLib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/yongyug/CLionProjects/rnn_gao_new/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/yongyug/CLionProjects/rnn_gao_new/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/src/Makefile&quot;  VERBOSE=1 rnnLib/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/home/yongyug/CLionProjects/rnn_gao_new/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/main.c">
+			<Option target="rnn_gao_new"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/celt_lpc.c">
+			<Option target="rnnLib"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/celt_lpc.h">
+			<Option target="rnnLib"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/denoise.c">
+			<Option target="rnnLib"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/denoise16.c">
+			<Option target="rnnLib"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/kiss_fft.c">
+			<Option target="rnnLib"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/kiss_fft.h">
+			<Option target="rnnLib"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/pitch.c">
+			<Option target="rnnLib"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/pitch.h">
+			<Option target="rnnLib"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/rnn.c">
+			<Option target="rnnLib"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/rnn.h">
+			<Option target="rnnLib"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/rnn_data.c">
+			<Option target="rnnLib"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/rnn_data.h">
+			<Option target="rnnLib"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/yongyug/CLionProjects/rnn_gao_new/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
