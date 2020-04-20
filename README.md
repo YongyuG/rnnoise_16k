@@ -1,5 +1,6 @@
 
-#RNNoise training for 16K audio
+RNNoise training for 16K audio
+==============================
 
 
 Notification
@@ -7,7 +8,8 @@ Notification
 This project is refered to Dr.Jean-Marc Valin efforts from [RNNoise: Learning Noise Suppression](https://people.xiph.org/~jm/demo/rnnoise/)
 
 References:
-Paper: [A Hybrid DSP/Deep Learning Approach toReal-Time Full-Band Speech Enhancement](https://jmvalin.ca/papers/rnnoise_mmsp2018.pdf)
+Paper: [A Hybrid DSP/Deep Learning Approach toReal-Time Full-Band Speech Enhancement](https://jmvalin.ca/papers/rnnoise_mmsp2018.pdf)  
+
 Original Github Repo: [RNNoise Original Project](https://github.com/xiph/rnnoise)
 
 
