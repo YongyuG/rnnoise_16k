@@ -2183,7 +2183,8 @@ static inline float drmp3_mix_f32(float x, float y, float a)
 
 static void drmp3_blend_f32(float* pOut, float* pInA, float* pInB, float factor, drmp3_uint32 channels)
 {
-    for (drmp3_uint32 i = 0; i < channels; ++i) {
+    drmp3_uint32 i;
+    for (i = 0; i < channels; ++i) {
         pOut[i] = drmp3_mix_f32(pInA[i], pInB[i], factor);
     }
 }
@@ -2375,15 +2376,15 @@ drmp3_uint64 drmp3_src_read_frames_linear(drmp3_src* pSRC, drmp3_uint64 frameCou
         // The new alpha value is how we determine whether or not we need to read fresh frames.
         drmp3_uint32 framesToReadFromClient = (drmp3_uint32)pSRC->algo.linear.alpha;
         pSRC->algo.linear.alpha = pSRC->algo.linear.alpha - framesToReadFromClient;
-
-        for (drmp3_uint32 i = 0; i < framesToReadFromClient; ++i) {
-            for (drmp3_uint32 j = 0; j < pSRC->config.channels; ++j) {
+        drmp3_uint32 i, j;
+        for (i = 0; i < framesToReadFromClient; ++i) {
+            for (j = 0; j < pSRC->config.channels; ++j) {
                 pPrevFrame[j] = pNextFrame[j];
             }
 
             drmp3_uint64 framesRead = drmp3_src_cache_read_frames(&pSRC->cache, 1, pNextFrame);
             if (framesRead == 0) {
-                for (drmp3_uint32 j = 0; j < pSRC->config.channels; ++j) {
+                for (j = 0; j < pSRC->config.channels; ++j) {
                     pNextFrame[j] = 0;
                 }
 
@@ -3014,7 +3015,8 @@ drmp3_bool32 drmp3_find_closest_seek_point(drmp3* pMP3, drmp3_uint64 frameIndex,
     }
 
     // Linear search for simplicity to begin with while I'm getting this thing working. Once it's all working change this to a binary search.
-    for (drmp3_uint32 iSeekPoint = 0; iSeekPoint < pMP3->seekPointCount; ++iSeekPoint) {
+    drmp3_uint32 iSeekPoint;
+    for (iSeekPoint = 0; iSeekPoint < pMP3->seekPointCount; ++iSeekPoint) {
         if (pMP3->pSeekPoints[iSeekPoint].pcmFrameIndex > frameIndex) {
             break;  // Found it.
         }
@@ -3053,7 +3055,8 @@ drmp3_bool32 drmp3_seek_to_pcm_frame__seek_table(drmp3* pMP3, drmp3_uint64 frame
     drmp3_reset(pMP3);
 
     // Whole MP3 frames need to be discarded first.
-    for (drmp3_uint16 iMP3Frame = 0; iMP3Frame < seekPoint.mp3FramesToDiscard; ++iMP3Frame) {
+    drmp3_uint16 iMP3Frame;
+    for (iMP3Frame = 0; iMP3Frame < seekPoint.mp3FramesToDiscard; ++iMP3Frame) {
         // Pass in non-null for the last frame because we want to ensure the sample rate converter is preloaded correctly.
         drmp3d_sample_t* pPCMFrames = NULL;
         if (iMP3Frame == seekPoint.mp3FramesToDiscard-1) {
@@ -3247,9 +3250,9 @@ drmp3_bool32 drmp3_calculate_seek_points(drmp3* pMP3, drmp3_uint32* pSeekPointCo
 
         drmp3_uint64 runningPCMFrameCount = 0;
         float runningPCMFrameCountFractionalPart = 0;
-
+        int iMP3Frame;
         // We need to initialize the array of MP3 byte positions for the leading MP3 frames.
-        for (int iMP3Frame = 0; iMP3Frame < DRMP3_SEEK_LEADING_MP3_FRAMES+1; ++iMP3Frame) {
+        for (iMP3Frame = 0; iMP3Frame < DRMP3_SEEK_LEADING_MP3_FRAMES+1; ++iMP3Frame) {
             // The byte position of the next frame will be the stream's cursor position, minus whatever is sitting in the buffer.
                     drmp3_assert(pMP3->streamCursor >= pMP3->dataSize);
             mp3FrameInfo[iMP3Frame].bytePos       = pMP3->streamCursor - pMP3->dataSize;
@@ -3267,7 +3270,8 @@ drmp3_bool32 drmp3_calculate_seek_points(drmp3* pMP3, drmp3_uint32* pSeekPointCo
         // At this point we will have extracted the byte positions of the leading MP3 frames. We can now start iterating over each seek point and
         // calculate them.
         drmp3_uint64 nextTargetPCMFrame = 0;
-        for (drmp3_uint32 iSeekPoint = 0; iSeekPoint < seekPointCount; ++iSeekPoint) {
+        drmp3_uint32 iSeekPoint;
+        for (iSeekPoint = 0; iSeekPoint < seekPointCount; ++iSeekPoint) {
             nextTargetPCMFrame += pcmFramesBetweenSeekPoints;
 
             for (;;) {
@@ -3281,7 +3285,8 @@ drmp3_bool32 drmp3_calculate_seek_points(drmp3* pMP3, drmp3_uint32* pSeekPointCo
                 } else {
                     // The next seek point is not in the current MP3 frame, so continue on to the next one. The first thing to do is cycle the cached
                     // MP3 frame info.
-                    for (size_t i = 0; i < drmp3_countof(mp3FrameInfo)-1; ++i) {
+                    size_t i;
+                    for (i = 0; i < drmp3_countof(mp3FrameInfo)-1; ++i) {
                         mp3FrameInfo[i] = mp3FrameInfo[i+1];
                     }
 

@@ -41,10 +41,10 @@
 #include "rnn_data.h"
 #include <dirent.h>
 #include <time.h>
-#define DR_MP3_IMPLEMENTATION
-#define DR_WAV_IMPLEMENTATION
-#include "dr_mp3.h"
-#include "dr_wav.h"
+//#define DR_MP3_IMPLEMENTATION
+//#define DR_WAV_IMPLEMENTATION
+//#include "dr_mp3.h"
+//#include "dr_wav.h"
 #define BLOCK_SIZE 8000
 #define FRAME_SIZE_SHIFT 2
 #define FRAME_SIZE (40<<FRAME_SIZE_SHIFT)
@@ -535,6 +535,7 @@ float rnnoise_process_frame(DenoiseState *st, float *out, const float *in) {
 }
 
 /*Gao new implmentation edition in SNR*/
+#if TRAINING
 
 float calculate_wav_energy(float *wav_buffer, uint64_t sampleCount){
     float *input = wav_buffer;
@@ -699,11 +700,11 @@ float  *open_file(char **dir_list, int file_list_len, uint32_t *sampleRate, uint
     return buffer;
 }
 
+#endif
 
 
 
-
-#define TRAINING 1
+//define TRAINING 1
 #if TRAINING
 
 static float uni_rand() {

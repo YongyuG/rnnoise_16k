@@ -963,7 +963,8 @@ static DRWAV_INLINE drwav_uint64 drwav__bytes_to_u64(const unsigned char* data)
 
 static DRWAV_INLINE void drwav__bytes_to_guid(const unsigned char* data, drwav_uint8* guid)
 {
-    for (int i = 0; i < 16; ++i) {
+    int i;
+    for (i = 0; i < 16; ++i) {
         guid[i] = data[i];
     }
 }
@@ -1625,8 +1626,8 @@ drwav_bool32 drwav_init_ex(drwav* pWav, drwav_read_proc onRead, drwav_seek_proc 
         if (drwav__on_read(onRead, pReadSeekUserData, riff2, sizeof(riff2), &cursor) != sizeof(riff2)) {
             return DRWAV_FALSE;
         }
-
-        for (int i = 0; i < 12; ++i) {
+        int i;
+        for (i = 0; i < 12; ++i) {
             if (riff2[i] != drwavGUID_W64_RIFF[i+4]) {
                 return DRWAV_FALSE;
             }
@@ -1792,7 +1793,7 @@ drwav_bool32 drwav_init_ex(drwav* pWav, drwav_read_proc onRead, drwav_seek_proc 
                 }
             }
         }
-
+    
         // "smpl" chunk.
         if (pWav->container == drwav_container_riff) {
             if (drwav__fourcc_equal(header.id.fourcc, "smpl")) {
@@ -1811,8 +1812,8 @@ drwav_bool32 drwav_init_ex(drwav* pWav, drwav_read_proc onRead, drwav_seek_proc 
                         pWav->smpl.smpteOffset       = drwav__bytes_to_u32(smplHeaderData+24);
                         pWav->smpl.numSampleLoops    = drwav__bytes_to_u32(smplHeaderData+28);
                         pWav->smpl.samplerData       = drwav__bytes_to_u32(smplHeaderData+32);
-
-                        for (drwav_uint32 iLoop = 0; iLoop < pWav->smpl.numSampleLoops && iLoop < drwav_countof(pWav->smpl.loops); ++iLoop) {
+                        drwav_uint32 iLoop;
+                        for (iLoop = 0; iLoop < pWav->smpl.numSampleLoops && iLoop < drwav_countof(pWav->smpl.loops); ++iLoop) {
                             unsigned char smplLoopData[24];  // 24 = size of a loop section in the smpl chunk.
                             bytesJustRead = drwav__on_read(onRead, pReadSeekUserData, smplLoopData, sizeof(smplLoopData), &cursor);
                             chunkSize -= bytesJustRead;
@@ -2701,14 +2702,15 @@ drwav_uint64 drwav_read_s16__ima(drwav* pWav, drwav_uint64 samplesToRead, drwav_
                 // From what I can tell with stereo streams, it looks like every 4 bytes (8 samples) is for one channel. So it goes 4 bytes for the
                 // left channel, 4 bytes for the right channel.
                 pWav->ima.cachedSampleCount = 8 * pWav->channels;
-                for (drwav_uint32 iChannel = 0; iChannel < pWav->channels; ++iChannel) {
+                drwav_uint32 iChannel, iByte;
+                for (iChannel = 0; iChannel < pWav->channels; ++iChannel) {
                     drwav_uint8 nibbles[4];
                     if (pWav->onRead(pWav->pUserData, &nibbles, 4) != 4) {
                         return totalSamplesRead;
                     }
                     pWav->ima.bytesRemainingInBlock -= 4;
 
-                    for (drwav_uint32 iByte = 0; iByte < 4; ++iByte) {
+                    for (iByte = 0; iByte < 4; ++iByte) {
                         drwav_uint8 nibble0 = ((nibbles[iByte] & 0x0F) >> 0);
                         drwav_uint8 nibble1 = ((nibbles[iByte] & 0xF0) >> 4);
 
@@ -2811,8 +2813,9 @@ static void drwav__pcm_to_s16(drwav_int16* pOut, const unsigned char* pIn, size_
 
 
     // Slightly more optimal implementation for common formats.
+    unsigned int i;
     if (bytesPerSample == 2) {
-        for (unsigned int i = 0; i < totalSampleCount; ++i) {
+        for (i = 0; i < totalSampleCount; ++i) {
            *pOut++ = ((const drwav_int16*)pIn)[i];
         }
         return;
@@ -2835,7 +2838,7 @@ static void drwav__pcm_to_s16(drwav_int16* pOut, const unsigned char* pIn, size_
 
 
     // Generic, slow converter.
-    for (unsigned int i = 0; i < totalSampleCount; ++i) {
+    for (i = 0; i < totalSampleCount; ++i) {
         drwav_uint64 sample = 0;
         unsigned int shift  = (8 - bytesPerSample) * 8;
 
@@ -3018,7 +3021,8 @@ drwav_uint64 drwav_read_pcm_frames_s16(drwav* pWav, drwav_uint64 framesToRead, d
 void drwav_u8_to_s16(drwav_int16* pOut, const drwav_uint8* pIn, size_t sampleCount)
 {
     int r;
-    for (size_t i = 0; i < sampleCount; ++i) {
+    size_t i;
+    for (i = 0; i < sampleCount; ++i) {
         int x = pIn[i];
         r = x - 128;
         r = r << 8;
@@ -3029,7 +3033,8 @@ void drwav_u8_to_s16(drwav_int16* pOut, const drwav_uint8* pIn, size_t sampleCou
 void drwav_s24_to_s16(drwav_int16* pOut, const drwav_uint8* pIn, size_t sampleCount)
 {
     int r;
-    for (size_t i = 0; i < sampleCount; ++i) {
+    size_t i;
+    for (i = 0; i < sampleCount; ++i) {
         int x = ((int)(((unsigned int)(((const unsigned char*)pIn)[i*3+0]) << 8) | ((unsigned int)(((const unsigned char*)pIn)[i*3+1]) << 16) | ((unsigned int)(((const unsigned char*)pIn)[i*3+2])) << 24)) >> 8;
         r = x >> 8;
         pOut[i] = (short)r;
@@ -3039,7 +3044,8 @@ void drwav_s24_to_s16(drwav_int16* pOut, const drwav_uint8* pIn, size_t sampleCo
 void drwav_s32_to_s16(drwav_int16* pOut, const drwav_int32* pIn, size_t sampleCount)
 {
     int r;
-    for (size_t i = 0; i < sampleCount; ++i) {
+    size_t i;
+    for (i = 0; i < sampleCount; ++i) {
         int x = pIn[i];
         r = x >> 16;
         pOut[i] = (short)r;
@@ -3049,7 +3055,8 @@ void drwav_s32_to_s16(drwav_int16* pOut, const drwav_int32* pIn, size_t sampleCo
 void drwav_f32_to_s16(drwav_int16* pOut, const float* pIn, size_t sampleCount)
 {
     int r;
-    for (size_t i = 0; i < sampleCount; ++i) {
+    size_t i;
+    for (i = 0; i < sampleCount; ++i) {
         float x = pIn[i];
         float c;
         c = ((x < -1) ? -1 : ((x > 1) ? 1 : x));
@@ -3063,7 +3070,8 @@ void drwav_f32_to_s16(drwav_int16* pOut, const float* pIn, size_t sampleCount)
 void drwav_f64_to_s16(drwav_int16* pOut, const double* pIn, size_t sampleCount)
 {
     int r;
-    for (size_t i = 0; i < sampleCount; ++i) {
+    size_t i;
+    for (i = 0; i < sampleCount; ++i) {
         double x = pIn[i];
         double c;
         c = ((x < -1) ? -1 : ((x > 1) ? 1 : x));
@@ -3076,14 +3084,16 @@ void drwav_f64_to_s16(drwav_int16* pOut, const double* pIn, size_t sampleCount)
 
 void drwav_alaw_to_s16(drwav_int16* pOut, const drwav_uint8* pIn, size_t sampleCount)
 {
-    for (size_t i = 0; i < sampleCount; ++i) {
+    size_t i;
+    for (i = 0; i < sampleCount; ++i) {
         pOut[i] = drwav__alaw_to_s16(pIn[i]);
     }
 }
 
 void drwav_mulaw_to_s16(drwav_int16* pOut, const drwav_uint8* pIn, size_t sampleCount)
 {
-    for (size_t i = 0; i < sampleCount; ++i) {
+    size_t i;
+    for (i = 0; i < sampleCount; ++i) {
         pOut[i] = drwav__mulaw_to_s16(pIn[i]);
     }
 }
@@ -3119,9 +3129,9 @@ static void drwav__pcm_to_f32(float* pOut, const unsigned char* pIn, size_t samp
         return;
     }
 
-
+    unsigned int i;
     // Generic, slow converter.
-    for (unsigned int i = 0; i < sampleCount; ++i) {
+    for (i = 0; i < sampleCount; ++i) {
         drwav_uint64 sample = 0;
         unsigned int shift  = (8 - bytesPerSample) * 8;
 
@@ -3138,8 +3148,9 @@ static void drwav__pcm_to_f32(float* pOut, const unsigned char* pIn, size_t samp
 
 static void drwav__ieee_to_f32(float* pOut, const unsigned char* pIn, size_t sampleCount, unsigned int bytesPerSample)
 {
+    unsigned int i;
     if (bytesPerSample == 4) {
-        for (unsigned int i = 0; i < sampleCount; ++i) {
+        for (i = 0; i < sampleCount; ++i) {
             *pOut++ = ((const float*)pIn)[i];
         }
         return;
@@ -3350,6 +3361,7 @@ drwav_uint64 drwav_read_pcm_frames_f32(drwav* pWav, drwav_uint64 framesToRead, f
 
 void drwav_u8_to_f32(float* pOut, const drwav_uint8* pIn, size_t sampleCount)
 {
+    size_t i;
     if (pOut == NULL || pIn == NULL) {
         return;
     }
@@ -3359,11 +3371,11 @@ void drwav_u8_to_f32(float* pOut, const drwav_uint8* pIn, size_t sampleCount)
     // libsndfile performs the conversion something like "f32 = (u8 / 256) * 2 - 1", however I think it should be "f32 = (u8 / 255) * 2 - 1" (note
     // the divisor of 256 vs 255). I use libsndfile as a benchmark for testing, so I'm therefore leaving this block here just for my automated
     // correctness testing. This is disabled by default.
-    for (size_t i = 0; i < sampleCount; ++i) {
+    for (i = 0; i < sampleCount; ++i) {
         *pOut++ = (pIn[i] / 256.0f) * 2 - 1;
     }
 #else
-    for (size_t i = 0; i < sampleCount; ++i) {
+    for (i = 0; i < sampleCount; ++i) {
         *pOut++ = (pIn[i] / 255.0f) * 2 - 1;
     }
 #endif
@@ -3371,22 +3383,24 @@ void drwav_u8_to_f32(float* pOut, const drwav_uint8* pIn, size_t sampleCount)
 
 void drwav_s16_to_f32(float* pOut, const drwav_int16* pIn, size_t sampleCount)
 {
+    size_t i;
     if (pOut == NULL || pIn == NULL) {
         return;
     }
 
-    for (size_t i = 0; i < sampleCount; ++i) {
+    for (i = 0; i < sampleCount; ++i) {
         *pOut++ = pIn[i] / 32768.0f;
     }
 }
 
 void drwav_s24_to_f32(float* pOut, const drwav_uint8* pIn, size_t sampleCount)
 {
+    size_t i;
     if (pOut == NULL || pIn == NULL) {
         return;
     }
 
-    for (size_t i = 0; i < sampleCount; ++i) {
+    for (i = 0; i < sampleCount; ++i) {
         unsigned int s0 = pIn[i*3 + 0];
         unsigned int s1 = pIn[i*3 + 1];
         unsigned int s2 = pIn[i*3 + 2];
@@ -3398,44 +3412,48 @@ void drwav_s24_to_f32(float* pOut, const drwav_uint8* pIn, size_t sampleCount)
 
 void drwav_s32_to_f32(float* pOut, const drwav_int32* pIn, size_t sampleCount)
 {
+    size_t i;
     if (pOut == NULL || pIn == NULL) {
         return;
     }
 
-    for (size_t i = 0; i < sampleCount; ++i) {
+    for (i = 0; i < sampleCount; ++i) {
         *pOut++ = (float)(pIn[i] / 2147483648.0);
     }
 }
 
 void drwav_f64_to_f32(float* pOut, const double* pIn, size_t sampleCount)
 {
+    size_t i;
     if (pOut == NULL || pIn == NULL) {
         return;
     }
 
-    for (size_t i = 0; i < sampleCount; ++i) {
+    for (i = 0; i < sampleCount; ++i) {
         *pOut++ = (float)pIn[i];
     }
 }
 
 void drwav_alaw_to_f32(float* pOut, const drwav_uint8* pIn, size_t sampleCount)
 {
+    size_t i;
     if (pOut == NULL || pIn == NULL) {
         return;
     }
 
-    for (size_t i = 0; i < sampleCount; ++i) {
+    for (i = 0; i < sampleCount; ++i) {
         *pOut++ = drwav__alaw_to_s16(pIn[i]) / 32768.0f;
     }
 }
 
 void drwav_mulaw_to_f32(float* pOut, const drwav_uint8* pIn, size_t sampleCount)
 {
+    size_t i;
     if (pOut == NULL || pIn == NULL) {
         return;
     }
 
-    for (size_t i = 0; i < sampleCount; ++i) {
+    for (i = 0; i < sampleCount; ++i) {
         *pOut++ = drwav__mulaw_to_s16(pIn[i]) / 32768.0f;
     }
 }
@@ -3444,6 +3462,7 @@ void drwav_mulaw_to_f32(float* pOut, const drwav_uint8* pIn, size_t sampleCount)
 
 static void drwav__pcm_to_s32(drwav_int32* pOut, const unsigned char* pIn, size_t totalSampleCount, unsigned int bytesPerSample)
 {
+    unsigned int i;
     // Special case for 8-bit sample data because it's treated as unsigned.
     if (bytesPerSample == 1) {
         drwav_u8_to_s32(pOut, pIn, totalSampleCount);
@@ -3460,7 +3479,7 @@ static void drwav__pcm_to_s32(drwav_int32* pOut, const unsigned char* pIn, size_
         return;
     }
     if (bytesPerSample == 4) {
-        for (unsigned int i = 0; i < totalSampleCount; ++i) {
+        for (i = 0; i < totalSampleCount; ++i) {
            *pOut++ = ((const drwav_int32*)pIn)[i];
         }
         return;
@@ -3475,7 +3494,7 @@ static void drwav__pcm_to_s32(drwav_int32* pOut, const unsigned char* pIn, size_
 
 
     // Generic, slow converter.
-    for (unsigned int i = 0; i < totalSampleCount; ++i) {
+    for (i = 0; i < totalSampleCount; ++i) {
         drwav_uint64 sample = 0;
         unsigned int shift  = (8 - bytesPerSample) * 8;
 
@@ -3703,11 +3722,12 @@ drwav_uint64 drwav_read_pcm_frames_s32(drwav* pWav, drwav_uint64 framesToRead, d
 
 void drwav_u8_to_s32(drwav_int32* pOut, const drwav_uint8* pIn, size_t sampleCount)
 {
+    size_t i;
     if (pOut == NULL || pIn == NULL) {
         return;
     }
 
-    for (size_t i = 0; i < sampleCount; ++i) {
+    for (i = 0; i < sampleCount; ++i) {
         *pOut++ = ((int)pIn[i] - 128) << 24;
     }
 }
@@ -3717,8 +3737,8 @@ void drwav_s16_to_s32(drwav_int32* pOut, const drwav_int16* pIn, size_t sampleCo
     if (pOut == NULL || pIn == NULL) {
         return;
     }
-
-    for (size_t i = 0; i < sampleCount; ++i) {
+    size_t i;
+    for (i = 0; i < sampleCount; ++i) {
         *pOut++ = pIn[i] << 16;
     }
 }
@@ -3728,8 +3748,8 @@ void drwav_s24_to_s32(drwav_int32* pOut, const drwav_uint8* pIn, size_t sampleCo
     if (pOut == NULL || pIn == NULL) {
         return;
     }
-
-    for (size_t i = 0; i < sampleCount; ++i) {
+    size_t i;
+    for (i = 0; i < sampleCount; ++i) {
         unsigned int s0 = pIn[i*3 + 0];
         unsigned int s1 = pIn[i*3 + 1];
         unsigned int s2 = pIn[i*3 + 2];
@@ -3744,41 +3764,44 @@ void drwav_f32_to_s32(drwav_int32* pOut, const float* pIn, size_t sampleCount)
     if (pOut == NULL || pIn == NULL) {
         return;
     }
-
-    for (size_t i = 0; i < sampleCount; ++i) {
+    size_t i;
+    for (i = 0; i < sampleCount; ++i) {
         *pOut++ = (drwav_int32)(2147483648.0 * pIn[i]);
     }
 }
 
 void drwav_f64_to_s32(drwav_int32* pOut, const double* pIn, size_t sampleCount)
 {
+    size_t i;
     if (pOut == NULL || pIn == NULL) {
         return;
     }
 
-    for (size_t i = 0; i < sampleCount; ++i) {
+    for (i = 0; i < sampleCount; ++i) {
         *pOut++ = (drwav_int32)(2147483648.0 * pIn[i]);
     }
 }
 
 void drwav_alaw_to_s32(drwav_int32* pOut, const drwav_uint8* pIn, size_t sampleCount)
 {
+    size_t i;
     if (pOut == NULL || pIn == NULL) {
         return;
     }
 
-    for (size_t i = 0; i < sampleCount; ++i) {
+    for (i = 0; i < sampleCount; ++i) {
         *pOut++ = ((drwav_int32)drwav__alaw_to_s16(pIn[i])) << 16;
     }
 }
 
 void drwav_mulaw_to_s32(drwav_int32* pOut, const drwav_uint8* pIn, size_t sampleCount)
 {
+    size_t i;
     if (pOut == NULL || pIn == NULL) {
         return;
     }
 
-    for (size_t i= 0; i < sampleCount; ++i) {
+    for (i= 0; i < sampleCount; ++i) {
         *pOut++ = ((drwav_int32)drwav__mulaw_to_s16(pIn[i])) << 16;
     }
 }
