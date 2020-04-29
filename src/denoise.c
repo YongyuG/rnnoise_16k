@@ -41,10 +41,12 @@
 #include "rnn_data.h"
 #include <dirent.h>
 #include <time.h>
-//#define DR_MP3_IMPLEMENTATION
-//#define DR_WAV_IMPLEMENTATION
-//#include "dr_mp3.h"
-//#include "dr_wav.h"
+#if TRAINING
+#define DR_MP3_IMPLEMENTATION
+#define DR_WAV_IMPLEMENTATION
+#include "dr_mp3.h"
+#include "dr_wav.h"
+#endif
 #define BLOCK_SIZE 8000
 #define FRAME_SIZE_SHIFT 2
 #define FRAME_SIZE (40<<FRAME_SIZE_SHIFT)
