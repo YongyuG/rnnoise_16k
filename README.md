@@ -34,6 +34,7 @@ the binary file will be generated in __bin__ directory, you can also change the 
 `
 Binary File <Input Noisy File> <Output Path>
 `
+
 __e.g:__ 
 `
 ./bin/rnn_gao_new noisy.wav out.wav
