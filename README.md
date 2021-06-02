@@ -24,3 +24,9 @@ The __src/denoice.c__ is the main thing on modification from __48k -> 16k__, and
 
 you also need to check __src/compile.sh__ for compiling src directory
 
+## Replace with new trained model
+if you follow the instructions and __training/run.sh__ new __rnn_data.c__ and __rnn_data.h__ will be generated,
+replace the __rnn_data.c__ and  __rnn_data.h__ in __src__ directory with the new one, using __CMakeList.txt__ in the working directory,
+* cmake .
+* make
+the binary file will be generated in __bin__ directory, you can also change the name of your binary inside __CMakeList.txt__
