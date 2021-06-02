@@ -36,6 +36,7 @@ Binary File <Input Noisy File> <Output Path>
 `
 
 __e.g:__ 
+
 `
 ./bin/rnn_gao_new noisy.wav out.wav
 `
