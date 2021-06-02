@@ -31,5 +31,10 @@ Replace the old __rnn_data.c__ and  __rnn_data.h__ in __src__ directory with the
 * make
 the binary file will be generated in __bin__ directory, you can also change the name of your binary inside __CMakeList.txt__
 ### The way to use binary file
+`
 Binary File <Input Noisy File> <Output Path>
-e.g: ./bin/rnn_gao_new noisy.wav out.wav
+`
+__e.g:__ 
+`
+./bin/rnn_gao_new noisy.wav out.wav
+`
