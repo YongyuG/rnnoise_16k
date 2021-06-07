@@ -34,7 +34,7 @@ Replace the old __rnn_data.c__ and  __rnn_data.h__ in __src__ directory with the
 * cmake .
 * make
 the binary file will be generated in __bin__ directory, you can also change the name of your binary inside __CMakeList.txt__
-Pay attention to 
+
 ### The way to use binary file
 `
 Binary File <Input Noisy File> <Output Path>
