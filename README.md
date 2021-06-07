@@ -33,7 +33,7 @@ if you follow the instructions and __training/run.sh__, new __rnn_data.c__ and _
 Replace the old __rnn_data.c__ and  __rnn_data.h__ in __src__ directory with the new one, using __CMakeList.txt__ in the working directory,
 * cmake .
 * make
-* 
+
 the binary file will be generated in __bin__ directory, you can also change the name of your binary inside __CMakeList.txt__
 
 ### The way to use binary file
